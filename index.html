@@ -2,81 +2,87 @@
 <html>
 <body>
 <h1>Docker Project</h1>
-     <li>Completed the project in Ubuntu.</li>
+<br>Completed the project in Ubuntu.
+<br>
+<br>First run an update:
+<br>sudo apt update
+<br>     
 
-     <li>First run an update:</li>
-sudo apt update
-     
-#Then install docker.io:
-sudo apt install docker.io
-    
-sudo apt install ca-certificates curl gnupg lsb-release
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io
-#Insert desired user
-sudo usermod -aG docker wjp2909
-    
-#Checks the current release will update if necessary:
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    
-#Applies executable permissions:
-sudo chmod +x /usr/local/bin/docker-compose
-    
-#Checks the version:
-docker-compose --version
-#Output: docker-compose version 1.29.2, build 5becea4c
-    
-#Created a directory called wordpress and located it under /srv:
-sudo mkdir -p /srv/wordpress
-
-#Changed to that directory:
-cd /srv/wordpress/
-
-#Created a YAML File name docker-compose.yaml inside /srv/wordpress directory:
-sudo vim docker-compose.yaml
-    
-#Defined services as mysql and wordpress.
-#They use a docker image which will use the latest versions of MySQL and WordPress.
-#The MySQL environment will let WordPress use the environment variables to 
-#connect to the MySQL container.
-#The WordPress environment will set the database connectivity details.
-#Made the default port to 8080.
-#The mysql_data makes it so that if the container is removed the data will still remain on
-#the machine.
-
-version: '3'
-services:
-mysql:
-image: mysql:latest
-restart: always
-environment:
-MYSQL_ROOT_PASSWORD: my_password
-MYSQL_DATABASE: wordpress
-MYSQL_USER: wordpress_user
-MYSQL_PASSWORD: wordpress_password
-volumes:
-- mysql_data:/var/lib/mysql
-wordpress:
-image: wordpress:latest
-depends_on:
-- mysql
-ports:
-- 8080:80
-restart: always
-environment:
-WORDPRESS_DB_HOST: mysql:3306
-WORDPRESS_DB_USER: wordpress_user
-WORDPRESS_DB_PASSWORD: wordpress_password
-volumes:
-- ./wp-content:/var/www/html/wp-content
-volumes:
-mysql_data:
-
-#Run WordPress with Docker Compose:
-sudo docker-compose up -d
-
+<br>Then install docker.io:
+<br>sudo apt install docker.io
+<br>   
+<br>sudo apt install ca-certificates curl gnupg lsb-release
+<br>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+<br>echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+<br>sudo apt update
+<br>sudo apt install docker-ce docker-ce-cli containerd.io
+<br>
+<br>Insert desired user
+<br>sudo usermod -aG docker wjp2909
+<br>    
+<br>Checks the current release will update if necessary:
+<br>sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+<br>    
+<br>Applies executable permissions:
+<br>sudo chmod +x /usr/local/bin/docker-compose
+<br>   
+<br>Checks the version:
+<br>docker-compose --version
+<br>Output: docker-compose version 1.29.2, build 5becea4c
+<br>  
+<br>Created a directory called wordpress and located it under /srv:
+<br>sudo mkdir -p /srv/wordpress
+<br>
+<br>Changed to that directory:
+<br>cd /srv/wordpress/
+<br>
+<br>Created a YAML File name docker-compose.yaml inside /srv/wordpress directory:
+<br>sudo vim docker-compose.yaml
+<br>
+<br>Defined services as mysql and wordpress.
+<br>They use a docker image which will use the latest versions of MySQL and WordPress.
+<br>The MySQL environment will let WordPress use the environment variables to 
+<br>connect to the MySQL container.
+<br>The WordPress environment will set the database connectivity details.
+<br>Made the default port to 8080.
+<br>The mysql_data makes it so that if the container is removed the data will still remain on
+<br>the machine.
+<br>
+<br>version: '3'
+<br>services:
+<br>mysql:
+<br>image: mysql:latest
+<br>restart: always
+<br>environment:
+<br>MYSQL_ROOT_PASSWORD: my_password
+<br>MYSQL_DATABASE: wordpress
+<br>MYSQL_USER: wordpress_user
+<br>MYSQL_PASSWORD: wordpress_password
+<br>volumes:
+<br>- mysql_data:/var/lib/mysql
+<br>wordpress:
+<br>image: wordpress:latest
+<br>depends_on:
+<br>- mysql
+<br>ports:
+<br>- 8080:80
+<br>restart: always
+<br>environment:
+<br>WORDPRESS_DB_HOST: mysql:3306
+<br>WORDPRESS_DB_USER: wordpress_user
+<br>WORDPRESS_DB_PASSWORD: wordpress_password
+<br>volumes:
+<br>- ./wp-content:/var/www/html/wp-content
+<br>volumes:
+<br>mysql_data:
+<br>
+<br>Run WordPress with Docker Compose:
+<br>sudo docker-compose up -d
+<br>
+<br>
+<a href="https://linuxiac.com/wordpress-with-docker/">Link to linuxiac.com/wordpress-with-docker/</a>
+<br>
+<br>
 
 <img>
 <a href="https://lh3.googleusercontent.com/KcpEBwXVcv-nzbk8rZ_9cJlzyik9NV6ueRC1zv7OJKlyvKnfWF4wlxVzrC1Pjb7-nWsAHRO8vNUnvVh6X2yljn8WakJUHTCyUN9V9YOvfit2ki79fZb3qKhi9PISNDcJqbDPmNe2WA=w2400?source=screenshot.guru"> <img src="https://lh3.googleusercontent.com/KcpEBwXVcv-nzbk8rZ_9cJlzyik9NV6ueRC1zv7OJKlyvKnfWF4wlxVzrC1Pjb7-nWsAHRO8vNUnvVh6X2yljn8WakJUHTCyUN9V9YOvfit2ki79fZb3qKhi9PISNDcJqbDPmNe2WA=w600-h315-p-k" /> </a>
